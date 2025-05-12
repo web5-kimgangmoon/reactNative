@@ -25,3 +25,7 @@ react-native, github,
 ## 5/10
 
 1. environment resetting.
+
+### 5/11
+
+1. react native 기초이론 공부중.
