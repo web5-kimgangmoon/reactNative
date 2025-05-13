@@ -2,14 +2,18 @@
 
 import {Component, PropsWithChildren, useState} from 'react';
 import {
+  Alert,
   Button,
   FlatList,
   Image,
+  Platform,
   ScrollView,
   SectionList,
   StyleSheet,
   Text,
   TextInput,
+  TouchableHighlight,
+  TouchableNativeFeedback,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -454,99 +458,209 @@ const globalStylees = StyleSheet.create({
 
 // export default SectionListBasics;
 
-const FlexDirectionBasics = () => {
-  const [flexDirection, setflexDirection] = useState('column');
+// const FlexDirectionBasics = () => {
+//   const [flexDirection, setflexDirection] = useState('column');
+
+//   return (
+//     <PreviewLayout
+//       label="flexDirection"
+//       values={['column', 'row', 'column-reverse', 'row-reverse']}
+//       selectedValue={flexDirection}
+//       setSelectedValue={setflexDirection}>
+//       <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
+//       <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
+//       <View style={[styles.box, {backgroundColor: 'steelblue'}]} />
+//     </PreviewLayout>
+//   );
+// };
+
+// const DirectionLayout = () => {
+//   const [direction, setDirection] = useState('ltr');
+
+//   return (
+//     <PreviewLayout
+//       label="direction"
+//       selectedValue={direction}
+//       values={['ltr', 'rtl']}
+//       setSelectedValue={setDirection}>
+//       <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
+//       <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
+//       <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
+//     </PreviewLayout>
+//   );
+// };
+
+// type PreviewLayoutProps = PropsWithChildren<{
+//   label: string;
+//   values: string[];
+//   selectedValue: string;
+//   setSelectedValue: (value: string) => void;
+// }>;
+
+// const PreviewLayout = ({
+//   label,
+//   children,
+//   values,
+//   selectedValue,
+//   setSelectedValue,
+// }: PreviewLayoutProps) => (
+//   <View style={{padding: 10, flex: 1}}>
+//     <Text style={styles.label}>{label}</Text>
+//     <View style={styles.row}>
+//       {values.map(value => (
+//         <TouchableOpacity
+//           key={value}
+//           onPress={() => setSelectedValue(value)}
+//           style={[styles.button, selectedValue === value && styles.selected]}>
+//           <Text
+//             style={[
+//               styles.buttonLabel,
+//               selectedValue === value && styles.selectedLabel,
+//             ]}>
+//             {value}
+//           </Text>
+//         </TouchableOpacity>
+//       ))}
+//     </View>
+//     <View style={[styles.container, {[label]: selectedValue}]}>{children}</View>
+//   </View>
+// );
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     marginTop: 8,
+//     backgroundColor: 'aliceblue',
+//   },
+//   box: {
+//     width: 50,
+//     height: 50,
+//   },
+//   row: {
+//     flexDirection: 'row',
+//     flexWrap: 'wrap',
+//   },
+//   button: {
+//     paddingHorizontal: 8,
+//     paddingVertical: 6,
+//     borderRadius: 4,
+//     backgroundColor: 'oldlace',
+//     alignSelf: 'flex-start',
+//     marginHorizontal: '1%',
+//     minWidth: '48%',
+//     textAlign: 'center',
+//   },
+//   selected: {
+//     backgroundColor: 'coral',
+//     borderWidth: 0,
+//   },
+//   buttonLabel: {
+//     fontSize: 12,
+//     fontWeight: '500',
+//     color: 'coral',
+//   },
+//   selectedLabel: {
+//     color: 'white',
+//   },
+//   label: {
+//     textAlign: 'center',
+//     marginBottom: 10,
+//     fontSize: 24,
+//   },
+// });
+
+// export default FlexDirectionBasics;
+
+// const ButtonBasics = () => {
+//   const onPress = () => {
+//     Alert.alert('You activited my trap card');
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <View style={styles.buttonContainer}>
+//         <Button onPress={onPress} title="Press Me" />
+//       </View>
+//       <View style={styles.buttonContainer}>
+//         <Button onPress={onPress} title="Press Me" color="#841584" />
+//       </View>
+//       <View style={styles.alternativeLayoutButtonContainer}>
+//         <Button onPress={onPress} title="This looks great" />
+//         <Button onPress={onPress} title="OK!" color="#841584" />
+//       </View>
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//   },
+//   buttonContainer: {
+//     margin: 20,
+//   },
+//   alternativeLayoutButtonContainer: {
+//     margin: 20,
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//   },
+// });
+
+// export default ButtonBasics;
+
+const Touchables = () => {
+  const onPressButton = () => {
+    Alert.alert('You activited my trap card!');
+  };
+
+  const onLongPressButton = () => {
+    Alert.alert('Hello motto');
+  };
 
   return (
-    <PreviewLayout
-      label="flexDirection"
-      values={['column', 'row', 'column-reverse', 'row-reverse']}
-      selectedValue={flexDirection}
-      setSelectedValue={setflexDirection}>
-      <View style={[styles.box, {backgroundColor: 'powderblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'skyblue'}]} />
-      <View style={[styles.box, {backgroundColor: 'steelblue'}]} />
-    </PreviewLayout>
+    <View style={styles.container}>
+      <TouchableHighlight onPress={onPressButton} underlayColor="white">
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>ouchableHighlight</Text>T
+        </View>
+      </TouchableHighlight>
+      <TouchableOpacity onPress={onPressButton}>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>TouchableOpacity</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableNativeFeedback
+        onPress={onLongPressButton}
+        background={
+          Platform.OS === 'android'
+            ? TouchableNativeFeedback.SelectableBackground()
+            : undefined
+        }>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>Toushable with Long Press</Text>
+        </View>
+      </TouchableNativeFeedback>
+    </View>
   );
 };
 
-type PreviewLayoutProps = PropsWithChildren<{
-  label: string;
-  values: string[];
-  selectedValue: string;
-  setSelectedValue: (value: string) => void;
-}>;
-
-const PreviewLayout = ({
-  label,
-  children,
-  values,
-  selectedValue,
-  setSelectedValue,
-}: PreviewLayoutProps) => (
-  <View style={{padding: 10, flex: 1}}>
-    <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>
-      {values.map(value => (
-        <TouchableOpacity
-          key={value}
-          onPress={() => setSelectedValue(value)}
-          style={[styles.button, selectedValue === value && styles.selected]}>
-          <Text
-            style={[
-              styles.buttonLabel,
-              selectedValue === value && styles.selectedLabel,
-            ]}>
-            {value}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-    <View style={[styles.container, {[label]: selectedValue}]}>{children}</View>
-  </View>
-);
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 8,
-    backgroundColor: 'aliceblue',
-  },
-  box: {
-    width: 50,
-    height: 50,
-  },
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    paddingTop: 60,
+    alignItems: 'center',
   },
   button: {
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderRadius: 4,
-    backgroundColor: 'oldlace',
-    alignSelf: 'flex-start',
-    marginHorizontal: '1%',
-    minWidth: '48%',
+    marginBottom: 30,
+    width: 200,
+    alignItems: 'center',
+    backgroundColor: '#2196F3',
+  },
+  buttonText: {
     textAlign: 'center',
-  },
-  selected: {
-    backgroundColor: 'coral',
-    borderWidth: 0,
-  },
-  buttonLabel: {
-    fontSize: 12,
-    fontWeight: '500',
-    color: 'coral',
-  },
-  selectedLabel: {
+    padding: 20,
     color: 'white',
-  },
-  label: {
-    textAlign: 'center',
-    marginBottom: 10,
-    fontSize: 24,
   },
 });
 
-export default FlexDirectionBasics;
+export default Touchables;

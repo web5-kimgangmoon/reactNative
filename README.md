@@ -18,14 +18,19 @@ react-native, github,
 
 # 코딩시작 - 25/5/09
 
-## 5/9
+### 5/9
 
 1. environment setting.
 
-## 5/10
+### 5/10
 
 1. environment resetting.
 
 ### 5/11
 
 1. react native 기초이론 공부중.
+
+### 5/12
+
+1. 멀티 부팅, ubuntu 운영체제 간헐적인 시스템 다운 해결.
+2. reactNative 학습 중.
