@@ -36,3 +36,23 @@ vi config.ini
      2. 에러로 인식을 못했는지 아니면 에러로 인식을 해도 후속오류 때문인지 로그에 남질 않았다.
 
      3. 덕분에 3일간을 원인 찾기에 매달려야 했다.
+
+  - gpu가 문제의 핵심이었다.
+
+    1. nouveau가 듀얼 
+
+     ```bash
+     sudo nano /etc/modprobe.d/blacklist-nouveau.conf
+     ## this text
+     options nouveau modeset=0
+     sudo update-initramfs -u
+     sudo reboot
+     ```
+
+    2. nvidia 드라이버 설치(mig 기능없는 드라이버로), ubuntu는 드라이버가 지닌 기능과 관계없이 무조건 최신버전을 설치했고, 그결과 mig 기능이 없는 내 노트북 그래픽카드에서 path를 못 찾아 자꾸 시스템이 다운됐다.
+
+    ```bash
+    sudo apt-get install nvidia-driver-535 -y
+    ```
+
+    3. prime-select nvidia, 내가 쓰던 노트북은 그래픽 카드가 amd계열, nvidia계열이였고 그때문에 사실상 amd를 쓸 수 없었다. 애초에 호환이 안되고 서로, 커널에 내장된 그래픽 드라이버와 nvidia 드라이버가 충돌이 생겼다.
