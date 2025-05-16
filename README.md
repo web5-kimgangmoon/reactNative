@@ -34,3 +34,7 @@ react-native, github,
 
 1. 멀티 부팅, ubuntu 운영체제 간헐적인 시스템 다운 해결.
 2. reactNative 학습 중.
+
+### 5/13~5/14
+
+1. 우분투 gpu 문제 해결에 시간이 오래 걸렸습니다
