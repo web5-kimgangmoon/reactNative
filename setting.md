@@ -12,9 +12,22 @@
    sudo reboot
    ```
 
-2. nvidia-driver-550 버전, sudo prime-select on-demand
+2. nvidia-driver-550 버전, sudo prime-select nvidia
 
-3. https://forums.developer.nvidia.com/t/ubuntu-21-10-failed-to-grab-modeset-ownership-with-495-44/193867/51에서 설명대로 conf 파일들의 options nvidia-drm modeset=1 하나만 빼고 전부 지우기.
+     - p.s 
+
+3. https://forums.developer.nvidia.com/t/ubuntu-21-10-failed-to-grab-modeset-ownership-with-495-44/193867/51에서 설명대로 conf 파일들의 options nvidia-drm modeset=1 전부 지우기.
+
+    -   I have the line “options nvidia-drm modeset=1” in three files:
+
+        grep --include=*.conf -rnw ‘/’ -e “nvidia-drm” 2>/dev/null
+
+        “/usr/lib/modprobe.d/nvidia-kms.conf:3:options nvidia-drm modeset=1”
+        “/etc/modprobe.d/nvidia-graphics-drivers-kms.conf:3:options nvidia-drm modeset=1”
+        “/etc/modprobe.d/nvidia-nomodset.conf:1:options nvidia-drm modeset=1”
+
+        If the lines are commented out, the error message disappears.
+        If you leave this uncommented in at least one of the files, the error message will appear again.
 
 4. sudo nano /etc/X11/xorg.conf.d/10-amdgpu.conf
 
@@ -27,6 +40,26 @@ EndSection
 
 # PCI는 lspci | grep VGA에서 맨 앞의 01:00.0처럼, 이 숫자들을 1:0:0으로 맞추는 식으로 하면된다.
 ```
+5. https://askubuntu.com/questions/1364762/prime-run-command-not-found
+
+
+    1. Copy contents of the gist here
+
+    ```bash
+    #!/bin/bash
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
+    exec "$@"
+    ```
+
+    2. Create a file ~/bin/prime-run ("~" means your home directory)
+    
+    3. Paste the contents there.
+    
+    4. Run chmod +x "~/bin/prime-run" to make it executable.
+
 
 p.s gemini답변: 자세히 설명하자면, lspci와 같은 Linux 도구에서 PCI 장치를 식별하는 데 사용되는 표기법입니다.
 
