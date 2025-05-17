@@ -37,54 +37,51 @@ vi config.ini
 
      3. 덕분에 3일간을 원인 찾기에 매달려야 했다.
 
-  - gpu가 문제의 핵심이었다.
+- gpu가 문제의 핵심이었다.
 
-    1. nouveau가 듀얼 
+  1. nouveau가 듀얼
 
-     ```bash
-     sudo nano /etc/modprobe.d/blacklist-nouveau.conf
-     ## this text
-     options nouveau modeset=0
-     sudo update-initramfs -u
-     sudo reboot
-     ```
+  ```bash
+  sudo nano /etc/modprobe.d/blacklist-nouveau.conf
+  ## this text
+  options nouveau modeset=0
+  sudo update-initramfs -u
+  sudo reboot
+  ```
 
-    2. nvidia 드라이버 설치(mig 기능없는 드라이버로), ubuntu는 드라이버가 지닌 기능과 관계없이 무조건 최신버전을 설치했고, 그결과 mig 기능이 없는 내 노트북 그래픽카드에서 path를 못 찾아 자꾸 시스템이 다운됐다.
+  2. nvidia 드라이버 설치(mig 기능없는 드라이버로), ubuntu는 드라이버가 지닌 기능과 관계없이 무조건 최신버전을 설치했고, 그결과 mig 기능이 없는 내 노트북 그래픽카드에서 path를 못 찾아 자꾸 시스템이 다운됐다.
 
-    ```bash
-    sudo apt-get install nvidia-driver-535 -y
-    ```
+  ```bash
+  sudo apt-get install nvidia-driver-535 -y
+  ```
 
-    3. prime-select nvidia, 내가 쓰던 노트북은 그래픽 카드가 amd계열, nvidia계열이였고 그때문에 사실상 amd를 쓸 수 없었다. 애초에 호환이 안되고 서로, 커널에 내장된 그래픽 드라이버와 nvidia 드라이버가 충돌이 생겼다.
+  3. prime-select nvidia, 내가 쓰던 노트북은 그래픽 카드가 amd계열, nvidia계열이였고 그때문에 사실상 amd를 쓸 수 없었다. 애초에 호환이 안되고 서로, 커널에 내장된 그래픽 드라이버와 nvidia 드라이버가 충돌이 생겼다.
 
-    4. 문제 해결 완료. 모든 문제는 gpu였다.
+  4. 문제 해결 완료. 모든 문제는 gpu였다.
 
-       1. 부팅 옵션에서 nomodeset 3으로 driver없이 cli 환경에서 설정. nouveau, nvidiafb, amdgpu 드라이버 비활성화(blacklist).
+     1. 부팅 옵션에서 nomodeset 3으로 driver없이 cli 환경에서 설정. nouveau, nvidiafb, amdgpu 드라이버 비활성화(blacklist).
 
-       2. dmesg | grep nvidia로 확인하며 에러없이 그래픽카드에 맞는 드라이버 설치.
+     2. dmesg | grep nvidia로 확인하며 에러없이 그래픽카드에 맞는 드라이버 설치.
 
-       3. https:///forums.developer.nvidia.com/t/ubuntu-21-10-failed-to-grab-modeset-ownership-with-495-44/193867/51를 참고하여 error를 발생시키는 conf파일들을 찾아, nvidia-drm.modeset=1 옵션을 주석처리
-       
-       4. prime-select nvidia.
+     3. https:///forums.developer.nvidia.com/t/ubuntu-21-10-failed-to-grab-modeset-ownership-with-495-44/193867/51를 참고하여 error를 발생시키는 conf파일들을 찾아, nvidia-drm.modeset=1 옵션을 주석처리
 
-       5. sudo dmesg | grep nvidia
+     4. prime-select nvidia.
 
-          ```bash
-            [    1.827460] nvidia: loading out-of-tree module taints kernel.
-            [    1.827473] nvidia: module license 'NVIDIA' taints kernel.
-            [    1.827481] nvidia: module verification failed: signature and/or required key missing - tainting kernel
-            [    1.827484] nvidia: module license taints kernel.
-            [    1.972216] nvidia-nvlink: Nvlink Core is being initialized, major device number 235
-            [    1.973715] nvidia 0000:01:00.0: enabling device (0000 -> 0003)
-            [    1.973844] nvidia 0000:01:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
-            [    2.050146] nvidia-modeset: Loading NVIDIA Kernel Mode Setting Driver for UNIX platforms  550.144.03  Mon Dec 30 17:10:10 UTC 2024
-            [    2.053808] [drm] [nvidia-drm] [GPU ID 0x00000100] Loading driver
-            [    2.053812] [drm] Initialized nvidia-drm 0.0.0 for 0000:01:00.0 on minor 1
-            [    2.075761] nvidia_uvm: module uses symbols nvUvmInterfaceDisableAccessCntr from proprietary module nvidia, inheriting taint.
-            [    2.123644] nvidia-uvm: Loaded the UVM driver, major device number 511.
-          ```
+     5. sudo dmesg | grep nvidia
 
-        6. p.s. 근데 로그 번역해봤더니, 웃기긴 하다. nvidia 공식 드라이버를 무슨 오염물질 취급하고 있다. ㅋㅋㅋㅋ. 여튼 우분투 os개발자들이 안 좋아할지 언정 시스템은 안정적으로 돌아가게 되었다.
+        ```bash
+          [    1.827460] nvidia: loading out-of-tree module taints kernel.
+          [    1.827473] nvidia: module license 'NVIDIA' taints kernel.
+          [    1.827481] nvidia: module verification failed: signature and/or required key missing - tainting kernel
+          [    1.827484] nvidia: module license taints kernel.
+          [    1.972216] nvidia-nvlink: Nvlink Core is being initialized, major device number 235
+          [    1.973715] nvidia 0000:01:00.0: enabling device (0000 -> 0003)
+          [    1.973844] nvidia 0000:01:00.0: vgaarb: VGA decodes changed: olddecodes=io+mem,decodes=none:owns=none
+          [    2.050146] nvidia-modeset: Loading NVIDIA Kernel Mode Setting Driver for UNIX platforms  550.144.03  Mon Dec 30 17:10:10 UTC 2024
+          [    2.053808] [drm] [nvidia-drm] [GPU ID 0x00000100] Loading driver
+          [    2.053812] [drm] Initialized nvidia-drm 0.0.0 for 0000:01:00.0 on minor 1
+          [    2.075761] nvidia_uvm: module uses symbols nvUvmInterfaceDisableAccessCntr from proprietary module nvidia, inheriting taint.
+          [    2.123644] nvidia-uvm: Loaded the UVM driver, major device number 511.
+        ```
 
-
-          
+     6. p.s. 근데 로그 번역해봤더니, 웃기긴 하다. nvidia 공식 드라이버를 무슨 오염물질 취급하고 있다. ㅋㅋㅋㅋ. 여튼 우분투 os개발자들이 안 좋아할지 언정 시스템은 안정적으로 돌아가게 되었다.
