@@ -54,4 +54,8 @@ react-native, github,
 ### 5/22~24
 
 1. 핵심은 grub 부팅 옵션에 acpi_osi=Linux, asus는 windows용으로 설계되어 있어 충돌이 자주 발생했다.
+<<<<<<< HEAD
 2. 5/23은 commit만 누르고, push를 깜빡했습니다.
+=======
+2. reactNative, navigation 공부 필요.
+>>>>>>> f7fa4f5 (study: navigation not yet)

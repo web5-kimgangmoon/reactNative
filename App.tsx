@@ -1,5 +1,14 @@
 // import {Text, View} from 'react-native';
 
+import {
+  NavigationContainer,
+  ParamListBase,
+  ParamListRoute,
+} from '@react-navigation/native';
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import {Component, PropsWithChildren, useState} from 'react';
 import {
   Alert,
@@ -17,6 +26,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import HomeScreen from './components/home';
+import ProfileScreen from './components/profile';
 
 // const YourApp = () => {
 //   return (
@@ -665,8 +676,33 @@ const globalStylees = StyleSheet.create({
 
 // export default Touchables;
 
-const App = () => {
-  return <NavigationContainer></NavigationContainer>;
+export type RootStackParamList = {
+  Home: undefined;
+  Profile: {name: string};
 };
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Welcome'}}
+        />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+// const ProfileScreen = ({
+//   navigation,
+//   route,
+// }: NativeStackScreenProps<{['params']: {name: string}}, ''>) => {
+//   return <Text>This is {route!.params!.name}'s profile</Text>;
+// };
 
 export default App;
