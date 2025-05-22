@@ -609,58 +609,64 @@ const globalStylees = StyleSheet.create({
 
 // export default ButtonBasics;
 
-const Touchables = () => {
-  const onPressButton = () => {
-    Alert.alert('You activited my trap card!');
-  };
+// const Touchables = () => {
+//   const onPressButton = () => {
+//     Alert.alert('You activited my trap card!');
+//   };
 
-  const onLongPressButton = () => {
-    Alert.alert('Hello motto');
-  };
+//   const onLongPressButton = () => {
+//     Alert.alert('Hello motto');
+//   };
 
-  return (
-    <View style={styles.container}>
-      <TouchableHighlight onPress={onPressButton} underlayColor="white">
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>ouchableHighlight</Text>T
-        </View>
-      </TouchableHighlight>
-      <TouchableOpacity onPress={onPressButton}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>TouchableOpacity</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableNativeFeedback
-        onPress={onLongPressButton}
-        background={
-          Platform.OS === 'android'
-            ? TouchableNativeFeedback.SelectableBackground()
-            : undefined
-        }>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Toushable with Long Press</Text>
-        </View>
-      </TouchableNativeFeedback>
-    </View>
-  );
+//   return (
+//     <View style={styles.container}>
+//       <TouchableHighlight onPress={onPressButton} underlayColor="white">
+//         <View style={styles.button}>
+//           <Text style={styles.buttonText}>ouchableHighlight</Text>T
+//         </View>
+//       </TouchableHighlight>
+//       <TouchableOpacity onPress={onPressButton}>
+//         <View style={styles.button}>
+//           <Text style={styles.buttonText}>TouchableOpacity</Text>
+//         </View>
+//       </TouchableOpacity>
+//       <TouchableNativeFeedback
+//         onPress={onLongPressButton}
+//         background={
+//           Platform.OS === 'android'
+//             ? TouchableNativeFeedback.SelectableBackground()
+//             : undefined
+//         }>
+//         <View style={styles.button}>
+//           <Text style={styles.buttonText}>Toushable with Long Press</Text>
+//         </View>
+//       </TouchableNativeFeedback>
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     paddingTop: 60,
+//     alignItems: 'center',
+//   },
+//   button: {
+//     marginBottom: 30,
+//     width: 200,
+//     alignItems: 'center',
+//     backgroundColor: '#2196F3',
+//   },
+//   buttonText: {
+//     textAlign: 'center',
+//     padding: 20,
+//     color: 'white',
+//   },
+// });
+
+// export default Touchables;
+
+const App = () => {
+  return <NavigationContainer></NavigationContainer>;
 };
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 60,
-    alignItems: 'center',
-  },
-  button: {
-    marginBottom: 30,
-    width: 200,
-    alignItems: 'center',
-    backgroundColor: '#2196F3',
-  },
-  buttonText: {
-    textAlign: 'center',
-    padding: 20,
-    color: 'white',
-  },
-});
-
-export default Touchables;
+export default App;
