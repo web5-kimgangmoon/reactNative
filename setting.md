@@ -54,6 +54,9 @@ export __GLX_VENDOR_LIBRARY_NAME=nvidia
 
 5. sudo chmode +x /usr/local/bin/prime-run
 
+   - prime-run으로 nvidia 오프로드 실행가능.
+   - prime-run으로 에뮬레이터 실행결과, radeontop과 nvidia-smi를 확인하니 재렌더링시 radeontop의 부하가 확실하게 줄었다. 25퍼까지도 올라가던 내장그래픽 부하가, prime-run 사용후 5퍼센트 정도까지만 올라가게 되었다.
+
 6. sudo /ext/default/grub
 
    ```bash
