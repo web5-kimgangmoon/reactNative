@@ -75,6 +75,7 @@
 1. sudo apt-get install nvidia-driver-570 -y
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 2. nvidia-drm modeset=1 # 주석처리하거나 지워서 기본세팅으로.
 >>>>>>> 19e1341 (setting.md)
 
@@ -106,6 +107,8 @@
 5. sudo prime-select on-demand # 아래는 해당 명령어가 문제일 경우.
 =======
 
+=======
+>>>>>>> 5e8f882 (prime-run update)
 2. sudo prime-select on-demand # 아래는 해당 명령어가 문제일 경우, 사용.
 >>>>>>> dad295c (setting final)
 
@@ -115,6 +118,7 @@
    ```bash
    unknown
    ```
+
 3. nvidia-drm modeset=1 # 주석처리하거나 지워서 기본세팅으로.
 
    1. sudo nano /etc/modprobe.d/nvidia-graphics-drivers-kms.conf
@@ -131,14 +135,16 @@
 5. sudo update-initramfs -u
 
 6. sudo nano /usr/local/bin/prime-run
+   출처:https://askubuntu.com/questions/1364762/prime-run-command-not-found
 
-```bash
-#!/bin/bash
-
-export __NV_PRIME_RENDER_OFFLOAD=1
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-"$@"
-```
+   ```bash
+   #!/bin/bash
+   export __NV_PRIME_RENDER_OFFLOAD=1
+   export __GLX_VENDOR_LIBRARY_NAME=nvidia
+   export __VK_LAYER_NV_optimus=NVIDIA_only
+   export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
+   exec "$@"
+   ```
 
 7. sudo chmod +x /usr/local/bin/prime-run
 
@@ -238,12 +244,16 @@ p.s gemini답변: 자세히 설명하자면, lspci와 같은 Linux 도구에서 
     3. sudo amdgpu-install
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     - p.s. 난 amdgpu-install로 최신 드라이버 설치후 성능이 상승했다.
 =======
 >>>>>>> 19e1341 (setting.md)
 =======
     
+=======
+
+>>>>>>> 5e8f882 (prime-run update)
     - p.s. 난 amdgpu-install로 최신 드라이버 설치후 성능이 상승했다.
 >>>>>>> dad295c (setting final)
 
