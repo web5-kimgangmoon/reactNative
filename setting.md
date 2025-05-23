@@ -30,7 +30,7 @@
    3. sudo apt-get upgrade
    4. sudo apt-get install ubuntu-drivers-common
    5. sudo usermod -aG video [username] # 내가 설치했던 운영체제에선 video 그룹에 권한을 주지 않았다.
-   6. sudo /ext/default/grub
+   6. sudo nano /etc/default/grub
       ```bash
       GRUB_DEFAULT=0
       GRUB_TIMEOUT_STYLE=hidden
@@ -43,22 +43,8 @@
 
 1. sudo apt-get install nvidia-driver-570 -y
 
-2. nvidia-drm modeset=1 # 주석처리하거나 지워서 기본세팅으로.
 
-   1. sudo nano /etc/modprobe.d/nvidia-graphics-drivers-kms.conf
-   2. sudo nano /lib/modprobe.d/nvidia-kms.conf
-   3. 그외엔 grep -r nvidia-drm # 추가적으로 탐색
-
-3. sudo nano /etc/modprobe.d/blacklist-nouveau.conf // 없으면 추가
-
-   ```bash
-   blacklist nouveau
-   options nouveau modeset=0
-   ```
-
-4. sudo update-initramfs -u
-
-5. sudo prime-select on-demand # 아래는 해당 명령어가 문제일 경우.
+2. sudo prime-select on-demand # 아래는 해당 명령어가 문제일 경우, 사용.
 
    1. sudo prime-select nvidia
    2. sudo nano /etc/prime-discrete
@@ -66,6 +52,20 @@
    ```bash
    unknown
    ```
+3. nvidia-drm modeset=1 # 주석처리하거나 지워서 기본세팅으로.
+
+   1. sudo nano /etc/modprobe.d/nvidia-graphics-drivers-kms.conf
+   2. sudo nano /lib/modprobe.d/nvidia-kms.conf
+   3. 그외엔 grep -r nvidia-drm # 추가적으로 탐색
+
+4. sudo nano /etc/modprobe.d/blacklist-nouveau.conf ## grep -r /etc/modprobe.d로 확인후, 출력 없으면 추가
+
+   ```bash
+   blacklist nouveau
+   options nouveau modeset=0
+   ```
+
+5. sudo update-initramfs -u
 
 6. sudo nano /usr/local/bin/prime-run
 
@@ -109,6 +109,8 @@ p.s gemini답변: 자세히 설명하자면, lspci와 같은 Linux 도구에서 
     1. amdgpu-install 패키지를 검색, 공식사이트에서 deb 파일을 다운로드 및 설치한다.
     2. sudo apt-get remove --purge xserver-xorg-amdgpu-video-amdgpu
     3. sudo amdgpu-install
+    
+    - p.s. 난 amdgpu-install로 최신 드라이버 설치후 성능이 상승했다.
 
 # 기타 명령어
 
