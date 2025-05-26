@@ -157,6 +157,7 @@ p.s gemini답변: 자세히 설명하자면, lspci와 같은 Linux 도구에서 
 3. lsmod | grep nvidia 혹은 lsmod | grep amd
 4. glxinfo | grep "openGL renderer" # 현재 렌더링 중인 그래픽 카드.
 5. journalctl -ex | grep <target> # X11에서만 가능
+6. vulkaninfo | grep deviceName
 
 # 추가적으로 설치하면 좋은 유틸들
 
