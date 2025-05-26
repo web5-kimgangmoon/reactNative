@@ -51,6 +51,7 @@ react-native, github,
 
 1. 피부가 건조해져서 오늘 하루만 쉬겠습니다. 죄송합니다.
 
-### 5/22
+### 5/22~24
 
 1. 핵심은 grub 부팅 옵션에 acpi_osi=Linux, asus는 windows용으로 설계되어 있어 충돌이 자주 발생했다.
+2. 5/23은 commit만 누르고, push를 깜빡했습니다.
