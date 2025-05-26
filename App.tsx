@@ -9,7 +9,7 @@ import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import {Component, PropsWithChildren, useState} from 'react';
+import {Component, PropsWithChildren, useEffect, useState} from 'react';
 import {
   Alert,
   Button,

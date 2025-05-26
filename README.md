@@ -55,3 +55,7 @@ react-native, github,
 
 1. 핵심은 grub 부팅 옵션에 acpi_osi=Linux, asus는 windows용으로 설계되어 있어 충돌이 자주 발생했다.
 2. checkout도 실수했고, 금~토요일은 setting 커밋과 push도 깜빡했습니다.
+
+### 5/26
+
+1. 문제원인 발견, snap. 스냅 삭제 후 시스템이 안정적으로 동작, 시스템 로그가 남진 않지만 snapd 삭제후 충돌은 사라졌습니다.
